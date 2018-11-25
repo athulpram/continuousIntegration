@@ -1,3 +1,9 @@
+if [ $# -eq 0 ]; then
+  echo "Usage:"
+  echo "./continuousIntegration.sh <git URL> <Test interval>\n"
+  exit
+fi
+
 gitURL=$1
 watchTime=$2
 
