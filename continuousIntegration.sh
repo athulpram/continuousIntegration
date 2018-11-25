@@ -1,6 +1,6 @@
 if [ $# -eq 0 ]; then
   echo "Usage:"
-  echo "./continuousIntegration.sh <git URL> <Test interval>\n"
+  echo "./continuousIntegration.sh <git URL> [Test interval]\n"
   exit
 fi
 
@@ -11,6 +11,10 @@ repoName=$(echo $1|rev|cut -d'/' -f1|rev|cut -d '.' -f1 )
 
 if [ ! -d ${repoName} ]; then
  git clone $gitURL
+fi
+
+if [ -z ${watchTime} ]; then
+  watchTime=600
 fi
 
 cd $repoName
