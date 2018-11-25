@@ -14,7 +14,7 @@ while true; do
   echo "===============Continues integration running on $repoName==============="
   date
   tree
-  mocha > .lastMochaReport
+  mocha > ../.lastMochaReport
   mocha --reporter landing
   sleep $watchTime;
 done
