@@ -8,5 +8,13 @@ if [ ! -d ${repoName} ]; then
 fi
 
 cd $repoName
-
-watch -n $watchTime 'git pull>/dev/null;mocha'
+while true; do
+  git pull
+  clear
+  echo "===============Continues integration running on $repoName==============="
+  date
+  tree
+  mocha > .lastMochaReport
+  mocha --reporter landing
+  sleep $watchTime;
+done
