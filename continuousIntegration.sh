@@ -6,6 +6,7 @@ fi
 
 gitURL=$1
 watchTime=$2
+touch ./.lastMochaReport
 
 repoName=$(echo $1|rev|cut -d'/' -f1|rev|cut -d '.' -f1 )
 
@@ -24,7 +25,13 @@ while true; do
   echo "===============Continues integration running on $repoName==============="
   date
   tree
-  mocha > ../.lastMochaReport
+  $(mocha|sed 's/(*.ms)//g' > ../.currentMochaReport)
+  a=$(diff ../.lastMochaReport ../.currentMochaReport)
+  if [ "$a" != "" ]; then
+    echo $(date)"\n========================" >> ../.CILOGS
+    cat ../.currentMochaReport >> ../.CILOGS
+  fi
+  cat ../.currentMochaReport > ../.lastMochaReport
   mocha --reporter landing
   sleep $watchTime;
 done
