@@ -25,13 +25,13 @@ while true; do
   echo "===============Continues integration running on $repoName==============="
   date
   tree
-  $(mocha|sed 's/(*.ms)//g' > ../.currentMochaReport)
+  $(mocha|sed 's/(.*ms)//g' > ../.currentMochaReport)
   a=$(diff ../.lastMochaReport ../.currentMochaReport)
   if [ "$a" != "" ]; then
     echo $(date)"\n========================" >> ../.CILOGS
     cat ../.currentMochaReport >> ../.CILOGS
+    cat ../.currentMochaReport > ../.lastMochaReport
   fi
-  cat ../.currentMochaReport > ../.lastMochaReport
   mocha --reporter landing
   sleep $watchTime;
 done
