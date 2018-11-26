@@ -1,7 +1,8 @@
 --------------------------------------CI Manual--------------------------------------
 
 Usage 
+  ./continuousIntegration.sh <git URL> [Test interval]
 
-./continuousIntegration.sh <git URL> <Test interval>
 
-creates git repository in the directory which it was executed
+  The Default Time Interval is 10 min.
+  Log the mocha test report to .CILOGS if there is any change.
